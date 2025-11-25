@@ -24,8 +24,8 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
-      <SheetContent className="w-full sm:max-w-lg flex flex-col bg-card border-border">
-        <SheetHeader className="space-y-2.5 pr-6">
+      <SheetContent className="w-full sm:max-w-lg flex flex-col bg-card border-border p-6">
+        <SheetHeader className="space-y-2.5 pb-4">
           <SheetTitle className="flex items-center gap-2 text-foreground">
             <ShoppingBag className="w-5 h-5 text-primary" />
             Tu Carrito
@@ -38,7 +38,7 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex-1 flex flex-col items-center justify-center text-center px-4">
+          <div className="flex-1 flex flex-col items-center justify-center text-center px-6">
             <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-4">
               <ShoppingBag className="w-10 h-10 text-muted-foreground" />
             </div>
@@ -47,10 +47,10 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
           </div>
         ) : (
           <>
-            <ScrollArea className="flex-1 -mx-6 px-6">
-              <div className="space-y-4 py-4">
+            <ScrollArea className="flex-1 pr-2">
+              <div className="space-y-4 py-4 px-1">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-4 p-3 bg-secondary/50 rounded-xl border border-border">
+                  <div key={item.id} className="flex gap-4 p-4 bg-secondary/50 rounded-xl border border-border">
                     <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
@@ -63,7 +63,7 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-7 h-7 rounded-full border-border hover:bg-primary hover:text-primary-foreground hover:border-primary bg-transparent"
+                          className="w-8 h-8 rounded-full border-border hover:bg-primary hover:text-primary-foreground hover:border-primary bg-transparent"
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                         >
                           <Minus className="w-3 h-3" />
@@ -72,7 +72,7 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
                         <Button
                           variant="outline"
                           size="icon"
-                          className="w-7 h-7 rounded-full border-border hover:bg-primary hover:text-primary-foreground hover:border-primary bg-transparent"
+                          className="w-8 h-8 rounded-full border-border hover:bg-primary hover:text-primary-foreground hover:border-primary bg-transparent"
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
                         >
                           <Plus className="w-3 h-3" />
@@ -83,7 +83,7 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="w-7 h-7 text-muted-foreground hover:text-destructive"
+                        className="w-8 h-8 text-muted-foreground hover:text-destructive"
                         onClick={() => removeItem(item.id)}
                       >
                         <Trash2 className="w-4 h-4" />
@@ -97,9 +97,8 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
               </div>
             </ScrollArea>
 
-            <div className="space-y-4 pt-4">
-              <Separator className="bg-border" />
-              <div className="space-y-2">
+            <div className="space-y-4 pt-6 px-1 mt-4 border-t border-border">
+              <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
                   <span className="text-foreground">{formatPrice(total)}</span>
@@ -108,13 +107,13 @@ export function CartSheet({ onCheckout }: CartSheetProps) {
                   <span className="text-muted-foreground">Envío</span>
                   <span className="text-primary font-medium">Gratis</span>
                 </div>
-                <Separator className="bg-border" />
-                <div className="flex justify-between items-center">
-                  <span className="font-bold text-foreground">Total</span>
+                <Separator className="bg-border my-3" />
+                <div className="flex justify-between items-center py-2">
+                  <span className="font-bold text-foreground text-lg">Total</span>
                   <span className="text-2xl font-black text-primary">{formatPrice(total)}</span>
                 </div>
               </div>
-              <SheetFooter>
+              <SheetFooter className="mt-4">
                 <Button
                   className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg py-6 rounded-full"
                   onClick={() => {

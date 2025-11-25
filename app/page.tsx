@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { MenuSection } from "@/components/menu-section";
 import { CartSheet } from "@/components/cart-sheet";
 import { useState } from "react";
+import { OrderDialog } from "@/components/order-dialog";
 
 export default function Home() {
   const [isOrderDialogOpen, setIsOrderDialogOpen] = useState(false)
@@ -19,7 +20,7 @@ export default function Home() {
 
       <CartSheet onCheckout={() => setIsOrderDialogOpen(true)} />
 
-      {/* <OrderDialog open={isOrderDialogOpen} onOpenChange={setIsOrderDialogOpen} /> */}
+      <OrderDialog open={isOrderDialogOpen} onOpenChange={setIsOrderDialogOpen} />
     </main>
   );
 }

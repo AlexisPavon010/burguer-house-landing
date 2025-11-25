@@ -124,7 +124,7 @@ export function HeroSection() {
 
               {/* Price Badge */}
               <div className="absolute top-4 -left-4 bg-accent text-accent-foreground px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-                {currentBurger.price}
+                ${currentBurger.price}
               </div>
 
               {/* Name Badge */}
@@ -192,7 +192,7 @@ export function HeroSection() {
                       }`}
                   />
                   <h3 className="text-xl font-bold text-foreground mt-2">{slide.name}</h3>
-                  <p className="text-primary font-black text-lg">{slide.price}</p>
+                  <p className="text-primary font-black text-lg">${slide.price}</p>
                 </div>
               ))}
             </div>

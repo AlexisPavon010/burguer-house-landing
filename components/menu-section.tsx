@@ -16,7 +16,7 @@ const menuItems: Product[] = [
     description:
       "Pan tyuks de papa, salsita mostachos, medallón r.a de 120 grs, tybo x2, chorizo(zibelman), salsita criolla + papas mccain",
     price: 4500,
-    image: "/gourmet-burger-with-chorizo-cheese-and-special-sau.jpg",
+    image: "/viller.png",
     category: "burgers",
   },
   {
@@ -25,7 +25,7 @@ const menuItems: Product[] = [
     description:
       "Pan tyuks de papa, mayo casera, medallón r.a. de 120 grs x2, lechuga repollada, tomate, queso tybo x2, jamón cocido, huevo a la plancha + papas mccain",
     price: 5500,
-    image: "/double-burger-with-egg-lettuce-tomato-ham-cheese.jpg",
+    image: "/argenta.png",
     category: "burgers",
   },
   {
@@ -34,7 +34,7 @@ const menuItems: Product[] = [
     description:
       "Pan tyuks de papa, mayo casera, medallón r.a. de 120grs x2, cheddar x4, panceta dorada, huevo a la plancha + papas mccain",
     price: 5800,
-    image: "/double-burger-with-bacon-cheddar-cheese-fried-egg.jpg",
+    image: "/carteluda.png",
     category: "burgers",
   },
   {
@@ -209,10 +209,11 @@ export function MenuSection() {
                   key={category.id}
                   variant={activeCategory === category.id ? "default" : "outline"}
                   size="sm"
-                  className={`rounded-full font-semibold whitespace-nowrap ${activeCategory === category.id
-                    ? "bg-primary text-primary-foreground"
-                    : "border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-                    }`}
+                  className={`rounded-full font-semibold whitespace-nowrap ${
+                    activeCategory === category.id
+                      ? "bg-primary text-primary-foreground"
+                      : "border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                  }`}
                   onClick={() => setActiveCategory(category.id)}
                 >
                   {category.name}
@@ -226,10 +227,11 @@ export function MenuSection() {
               <Button
                 key={category.id}
                 variant={activeCategory === category.id ? "default" : "outline"}
-                className={`rounded-full font-semibold ${activeCategory === category.id
-                  ? "bg-primary text-primary-foreground"
-                  : "border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
-                  }`}
+                className={`rounded-full font-semibold ${
+                  activeCategory === category.id
+                    ? "bg-primary text-primary-foreground"
+                    : "border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
+                }`}
                 onClick={() => setActiveCategory(category.id)}
               >
                 {category.name}
@@ -259,7 +261,7 @@ export function MenuSection() {
                   <span className="text-base md:text-xl font-black text-primary">{formatPrice(item.price)}</span>
                   <Button
                     size="sm"
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-8 h-8 md:w-auto md:h-auto p-0 md:px-3"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-9 h-9 md:w-auto md:h-auto p-0 md:px-4 md:py-2"
                     onClick={() => addItem(item)}
                   >
                     <Plus className="w-4 h-4" />

@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { MenuSection } from "@/components/menu-section";
 import { CartSheet } from "@/components/cart-sheet";
+import { Toaster } from 'sonner'
 import { useState } from "react";
 import { OrderDialog } from "@/components/order-dialog";
 
@@ -17,7 +18,7 @@ export default function Home() {
       <BurgerSwiper />
       <MenuSection />
       <Footer />
-
+      <Toaster />
       <CartSheet onCheckout={() => setIsOrderDialogOpen(true)} />
 
       <OrderDialog open={isOrderDialogOpen} onOpenChange={setIsOrderDialogOpen} />

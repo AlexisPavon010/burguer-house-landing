@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { MapPin, Phone, User, CreditCard, CheckCircle } from "lucide-react"
+import { MapPin, Phone, User, CreditCard, CheckCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,6 +11,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { useCartStore } from "@/lib/store"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { OrderItem } from "@/types"
+import { createOrder } from "@/actions/order"
+import { generateOrderNumber } from "@/lib/utils"
+import { toast } from "sonner"
 
 interface OrderDialogProps {
   open: boolean
@@ -20,6 +24,8 @@ interface OrderDialogProps {
 export function OrderDialog({ open, onOpenChange }: OrderDialogProps) {
   const { items, getTotal, clearCart } = useCartStore()
   const [step, setStep] = useState(1)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [orderNumber, setOrderNumber] = useState("")
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -35,12 +41,58 @@ export function OrderDialog({ open, onOpenChange }: OrderDialogProps) {
     return `$${price.toLocaleString("es-AR")}`
   }
 
+  const submitOrder = async () => {
+    setIsSubmitting(true)
+
+    // Prepare order items
+    const orderItems: OrderItem[] = items.map((item) => ({
+      productId: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+    }))
+
+    // Prepare order data
+    const orderData = {
+      orderNumber: generateOrderNumber(),
+      customer: {
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+      },
+      items: orderItems,
+      paymentMethod: "card" as const,
+      subtotal: total,
+      total: total,
+    }
+
+    try {
+      const result = await createOrder(orderData)
+
+      if (result.success) {
+        console.log(result)
+        setOrderNumber(result.order.orderNumber)
+        toast.success("Pedido creado con éxito")
+        setStep(3)
+      } else {
+        console.error("[Order] Failed to create order:", result.error)
+        toast.error("Error al procesar el pedido. Intenta nuevamente.")
+      }
+    } catch (error) {
+      console.error("[Order] Error submitting order:", error)
+      alert("Error de conexión. Intenta nuevamente.")
+      toast.error("Error de conexión. Intenta nuevamente.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (step === 1) {
       setStep(2)
     } else if (step === 2) {
-      setStep(3)
+      submitOrder()
     }
   }
 
@@ -213,14 +265,23 @@ export function OrderDialog({ open, onOpenChange }: OrderDialogProps) {
                 variant="outline"
                 className="flex-1 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold py-6 rounded-full bg-transparent"
                 onClick={() => setStep(1)}
+                disabled={isSubmitting}
               >
                 Volver
               </Button>
               <Button
                 type="submit"
                 className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 font-bold py-6 rounded-full"
+                disabled={isSubmitting}
               >
-                Pagar {formatPrice(total)}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Procesando...
+                  </>
+                ) : (
+                  `Pagar ${formatPrice(total)}`
+                )}
               </Button>
             </div>
           </form>
@@ -238,10 +299,7 @@ export function OrderDialog({ open, onOpenChange }: OrderDialogProps) {
               <CardContent className="p-4">
                 <p className="text-sm text-muted-foreground">Número de orden</p>
                 <p className="text-xl font-bold text-primary">
-                  #BH
-                  {Math.floor(Math.random() * 10000)
-                    .toString()
-                    .padStart(4, "0")}
+                  #{orderNumber}
                 </p>
               </CardContent>
             </Card>

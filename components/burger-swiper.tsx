@@ -109,11 +109,11 @@ export function BurgerSwiper() {
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {featuredBurgers.map((burger) => (
-                <div key={burger.id} className="w-full flex-shrink-0 px-2 md:px-4">
+                <div key={burger.id} className="w-full shrink-0 px-2 md:px-4">
                   <Card className="bg-card border-border shadow-xl">
                     <CardContent className="p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-12">
                       {/* Image */}
-                      <div className="relative flex-shrink-0">
+                      <div className="relative shrink-0">
                         <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl" />
                         <img
                           src={burger.image || "/placeholder.svg"}
@@ -133,7 +133,7 @@ export function BurgerSwiper() {
                           <Button
                             size="lg"
                             className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold rounded-full px-8"
-                          onClick={() => addItem(burger)}
+                            onClick={() => addItem(burger)}
                           >
                             <Plus className="w-5 h-5 mr-2" />
                             Agregar

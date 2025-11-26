@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronDown, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react"
 
 const heroSlides = [
   {
@@ -95,6 +95,7 @@ export function HeroSection() {
                 asChild
               >
                 <a href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer">
+                  <MessageCircle  />
                   Ordenar por WhatsApp
                 </a>
               </Button>
@@ -115,8 +116,8 @@ export function HeroSection() {
                     src={slide.image}
                     alt={slide.name}
                     className={`absolute inset-0 w-full h-full object-contain drop-shadow-2xl transition-all duration-500 ${index === currentSlide
-                        ? "opacity-100 scale-100 animate-[float_3s_ease-in-out_infinite]"
-                        : "opacity-0 scale-95"
+                      ? "opacity-100 scale-100 animate-[float_3s_ease-in-out_infinite]"
+                      : "opacity-0 scale-95"
                       }`}
                   />
                 ))}

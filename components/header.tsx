@@ -1,6 +1,6 @@
 "use client"
 
-import { ShoppingCart, Menu, X } from "lucide-react"
+import { ShoppingCart, Menu, X, Hamburger } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useCartStore } from "@/lib/store"
@@ -17,7 +17,9 @@ export function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-black text-lg md:text-xl">BH</span>
+              <span className="text-primary-foreground font-black text-lg md:text-xl">
+                <Hamburger className="w-6 h-6" />
+              </span>
             </div>
             <span className="font-black text-xl md:text-2xl text-foreground">
               Burger<span className="text-primary"> House</span>

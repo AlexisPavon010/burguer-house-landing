@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
+import { motion } from "motion/react"
 import { ChevronDown, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react"
 
 const heroSlides = [
@@ -67,20 +68,55 @@ export function HeroSection() {
         {/* Desktop Layout */}
         <div className="hidden md:grid lg:grid-cols-2 gap-8 items-center">
           <div className="text-center lg:text-left">
-            <span className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold mb-6">
+            <motion.span
+              initial={{ opacity: 0, y: -40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              className="inline-block px-4 py-2 bg-primary/20 text-primary rounded-full text-sm font-semibold mb-6"
+            >
               Burger 🍔, pizzas 🍕 , lomos 🥪 y panchos 🌭 al paso
-            </span>
+            </motion.span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-foreground leading-tight mb-6">
-              <span className="text-balance">BIENVENIDOS A</span>
-              <br />
-              <span className="text-primary">BURGER</span>
-              <br />
-              <span className="text-balance">HOUSE</span>
+
+              <motion.span
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}
+                className="block"
+              >
+                BIENVENIDOS A
+              </motion.span>
+
+              <motion.span
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                className="text-primary block"
+              >
+                BURGER
+              </motion.span>
+
+              <motion.span
+                initial={{ opacity: 0, x: -60 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+                className="block"
+              >
+                HOUSE
+              </motion.span>
+
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl mb-8 max-w-lg mx-auto lg:mx-0">
-              Todas las noches a partir de las 19hs. Av. El Libertador, al lado de Tiki Drinks.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-muted-foreground text-lg md:text-xl mb-8 max-w-lg mx-auto lg:mx-0">
+              Todas las n oches a partir de las 19hs. Av. El Libertador, al lado de Tiki Drinks.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg px-8 py-6 rounded-full"
@@ -95,11 +131,11 @@ export function HeroSection() {
                 asChild
               >
                 <a href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer">
-                  <MessageCircle  />
+                  <MessageCircle />
                   Ordenar por WhatsApp
                 </a>
               </Button>
-            </div>
+            </ motion.div>
           </div>
 
           <div
@@ -255,6 +291,6 @@ export function HeroSection() {
       <div className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <ChevronDown className="w-8 h-8 text-primary" />
       </div>
-    </section>
+    </section >
   )
 }
